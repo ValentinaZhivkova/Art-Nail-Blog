@@ -2,12 +2,12 @@
 <h3>List Articles</h3>
 <p>Hello {{username}}!</p>
 
-<div class="ad-box col-md-3 col-lg-3" *ngFor="let article of articles" (article)="article">
+<div class="ad-box col-md-3 col-lg-3" *ngFor="let article of articles"(article)="article">
   <div class="box-title">
     <div>
       <div class="title">{{article?.title}}<div>
-        <a *ngIf="isInRole || isAuthorCheck(username, article)" href="/editArticle/{{article?._id}}" class="ad-control edit">&#9998;</a>
-        <a *ngIf="isInRole" href="/deleteArticle/{{article?._id}}" class="ad-control delete">&#10006;</a>
+        <a *ngIf="isInRole || isAuthorCheck(username, article)" href="/edit/{{article?._id}}" class="ad-control edit">&#9998;</a>
+        <button *ngIf="isInRole"  (click)="deleteArticle(article?._id)" class="ad-control delete">&#10006;</button>
       </div>
       </div>
       <br>

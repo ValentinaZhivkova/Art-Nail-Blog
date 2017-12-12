@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnChanges} from '@angular/core';
 import {ArticleService} from '../article.service';
 import {ArticleModel} from '../models/article.model';
 import {Observable} from 'rxjs/Observable';
@@ -10,7 +10,7 @@ import {AuthenticationService} from '../../authentication/auth.service';
   styleUrls: ['./list-articles.component.css']
 
 })
-export class ListArticlesComponent implements OnInit {
+export class ListArticlesComponent implements OnInit, OnChanges {
   public model: ArticleModel;
   public articles: Object;
   public username: string;
@@ -64,5 +64,20 @@ export class ListArticlesComponent implements OnInit {
   ngOnInit() {
     this.list();
     this.isAdminCheck(this.userId);
+  }
+
+  ngOnChanges() {
+    this.list();
+    this.isAdminCheck(this.userId);
+  }
+
+  deleteArticle(id) {
+    this.articleService.deleteArticle(id)
+      .subscribe(data => {
+          this.list();
+        },
+        err => {
+          console.log(err);
+        });
   }
 }

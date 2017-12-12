@@ -10,7 +10,7 @@ const appKey = 'kid_HJ1c0Hd-f';
 const appSecret = '7dd7a63d7b9f46b89e0bc22dea719afd';
 
 
-const listArticlesUrl = `https://baas.kinvey.com/appdata/${appKey}/articles`;
+const articlesUrl = `https://baas.kinvey.com/appdata/${appKey}/articles`;
 const postArticlesUrl = `https://baas.kinvey.com/appdata/${appKey}/articles`;
 const articleDetailsUrl = `https://baas.kinvey.com/appdata/${appKey}/articles`;
 
@@ -25,7 +25,7 @@ export class ArticleService {
 
   listArticles() {
     return this.http.get(
-      listArticlesUrl,
+      articlesUrl,
       {
         headers: this.createAuthHeaders('Kinvey')
       }
@@ -34,7 +34,7 @@ export class ArticleService {
 
   articleDetails(id) {
     return this.http.get(
-      listArticlesUrl + '/' + id,
+      articlesUrl + '/' + id,
       {
         headers: this.createAuthHeaders('Kinvey')
       }
@@ -49,7 +49,32 @@ export class ArticleService {
         headers: this.createAuthHeaders('Kinvey')
       }
     );
+  }
+  deleteArticle(id) {
+    return this.http.delete(
+      articlesUrl + '/' + id,
+      {
+        headers: this.createAuthHeaders('Kinvey')
+      }
+    );
+  }
 
+  getArticleById(id) {
+    return this.http.get(
+      articlesUrl + '/' + id,
+      {
+        headers: this.createAuthHeaders('Kinvey')
+      }
+    );
+  }
+  editArticleById(article, id) {
+    return this.http.put(
+      articlesUrl + '/' + id,
+      JSON.stringify(article),
+      {
+        headers: this.createAuthHeaders('Kinvey')
+      }
+    );
   }
 
 

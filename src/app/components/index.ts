@@ -1,6 +1,10 @@
 import {ListArticlesComponent} from './list-articles/list-articles.component';
-import { CreateArticleFormComponent } from './article-form/create-article.form.component';
+import { CreateArticleFormComponent } from './article-create/create-article.form.component';
 import { ArticleDetailsComponent } from './article-details/article-details.component';
+
+import {CommentComponent} from './comments/list-comments.component';
+
+import { EditArticleComponent } from './edit-article/edit-article.form.component';
 
 
 
@@ -8,5 +12,7 @@ import { ArticleDetailsComponent } from './article-details/article-details.compo
 export const articleComponents = [
   ListArticlesComponent,
   CreateArticleFormComponent,
-  ArticleDetailsComponent
+  ArticleDetailsComponent,
+  EditArticleComponent,
+  CommentComponent
 ];

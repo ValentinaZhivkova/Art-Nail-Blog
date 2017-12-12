@@ -7,9 +7,11 @@ import {HttpClientModule} from '@angular/common/http';
 
 // Services
 import {ArticleService} from './article.service';
+import { CommentsService } from './comment.service';
 import {articleComponents} from './index';
 import { FormsModule } from '@angular/forms';
-import {ArticleModel} from './models/article.model';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -20,10 +22,11 @@ import {ArticleModel} from './models/article.model';
   imports: [
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [articleComponents],
-  providers: [ArticleService]
+  providers: [ArticleService, CommentsService]
 })
 export class ArticleModule {
 }

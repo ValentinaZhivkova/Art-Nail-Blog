@@ -14,12 +14,14 @@ export class ArticleDetailsComponent implements OnInit {
   constructor(private articleService: ArticleService, private route: ActivatedRoute) {
 
     this.id = this.route.snapshot.params['id'];
+
   }
 
   ngOnInit() {
     console.log(this.id);
     this.articleService.articleDetails(this.id)
       .subscribe(data => {
+          console.log(this.id);
           this.article = data;
         },
         err => {
