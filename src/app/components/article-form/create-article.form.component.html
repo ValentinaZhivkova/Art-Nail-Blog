@@ -1,0 +1,56 @@
+
+<div><h4>DIAGNOSTICS</h4>{{diagnostics}}</div>
+<div class="container">
+  <h1>Article Form</h1>
+  <form (ngSubmit)="onSubmit()" #artcleForm="ngForm">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input name="title" type="text" class="form-control" id="title" [(ngModel)]="model.title" #title="ngModel"
+             maxlength="20"  required>
+    </div>
+    <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+
+      Title is required!
+    </div>
+    <div *ngIf="title.maxLength > 15" class="alert alert-danger">Maxlength</div>
+
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input name="author" type="text" class="form-control" id="author" [(ngModel)]="model.author" #author="ngModel"
+             required>
+    </div>
+    <div class="form-group">
+      <label for="image">Image Url</label>
+      <input type="url" class="form-control" id="image" name="image" [(ngModel)]="model.image" #image="ngModel"
+             required/>
+      <span [hidden]="image.valid || image.pristine">
+      Image is required!
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      <input name="content" type="text" class="form-control" id="content"[(ngModel)]="model.content" required>
+    </div>
+    <div class="form-group">
+      <label for="published">published</label>
+      <input name="published" type="text" class="form-control" id="published"[(ngModel)]="model.published" disabled>
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select class="form-control"
+              id="category"
+              required>
+        <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+      </select>
+    </div>
+
+    <button [disabled]="artcleForm.form.invalid" type="submit" class="btn btn-success">Submit</button>
+  </form>
+  <br>
+  <div>
+  <button (click)="artcleForm.reset()" class="btn btn-reset">Reset</button>
+</div>
+</div>
+
+
+

@@ -1,0 +1,26 @@
+<div class="container body-content">
+
+  <h2 class="ad-details">{{article?.title}}</h2>
+
+  <div class="ad-container detailed-ad-container">
+    <div class="row ads-row">
+      <div class="col-lg-12 detailed-ad-picture"><strong><img src="{{article?.image}}" width="400px"/></strong>
+      </div>
+    </div>
+    <div><strong>Category: {{article?.category}}</strong></div>
+
+    <div><strong>Description:</strong></div>
+    <fieldset>{{article?.content}}</fieldset>
+  </div>
+  <div ><strong>Published by: </strong>{{article?.author}}</div>
+<div>
+  <div><strong>Date Published: </strong>{{article?.published}}</div>
+</div>
+  <div class="row ads-row">
+    <div class="col-lg-4 col-lg-offset-4">
+      <a class="btn btn-info" href="/userProfile/{{article?.creator}}">Seller Details</a>
+
+    </div>
+  </div>
+</div>
+

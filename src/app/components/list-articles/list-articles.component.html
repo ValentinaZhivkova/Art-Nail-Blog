@@ -1,0 +1,28 @@
+<h1>Welcome to the Art Nail Blog</h1>
+<h3>List Articles</h3>
+<p>Hello {{username}}!</p>
+
+<div class="ad-box col-md-3 col-lg-3" *ngFor="let article of articles" (article)="article">
+  <div class="box-title">
+    <div>
+      <div class="title">{{article?.title}}<div>
+        <a *ngIf="isInRole || isAuthorCheck(username, article)" href="/editArticle/{{article?._id}}" class="ad-control edit">&#9998;</a>
+        <a *ngIf="isInRole" href="/deleteArticle/{{article?._id}}" class="ad-control delete">&#10006;</a>
+      </div>
+      </div>
+      <br>
+      <div><img src="{{article?.image}}" alt="image" class="img-responsive"></div>
+      <br>
+      <div>Created by {{article?.author}} on {{article?.published}}</div>
+      <br>
+
+      <div>Category: {{article?.category}}</div>
+      <br>
+      <div>
+        <a href="/details/{{article?._id}}" class="btn btn-default">More info</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>

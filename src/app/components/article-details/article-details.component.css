@@ -1,0 +1,23 @@
+.detailed-view{
+  height: auto;
+  width: auto;
+  text-align: center;
+}
+
+.detailed-ad picture {
+  height: auto;
+  width: auto;
+  max-width: 300px;
+  max-height: 300px;
+  border: 1px solid black;
+}
+.ad-details {
+  text-transform: uppercase;
+  text-align: center;
+}
+.detailed-ad-picture {
+  text-align: center;
+}
+.container body-content{
+  text-align: center;
+}
