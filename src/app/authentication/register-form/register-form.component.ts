@@ -17,7 +17,7 @@ export class RegisterFormComponent implements OnInit {
   public registerFail: boolean;
 
   constructor(private authService: AuthenticationService, private router: Router) {
-    this.model = new RegisterModel('', '', '', '');
+    this.model = new RegisterModel('', '', '', '', 'http://via.placeholder.com/350x200');
   }
 
   register(): void {

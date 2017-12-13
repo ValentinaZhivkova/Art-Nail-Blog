@@ -15,7 +15,7 @@ import {ArticleModel} from '../models/article.model';
   styleUrls: ['./edit-article.form.component.css']
 })
 export class EditArticleComponent implements OnInit {
-  public articleId: number;
+  public articleId: string;
   public model: ArticleModel;
   public article: Object;
 
@@ -88,7 +88,7 @@ export class EditArticleComponent implements OnInit {
       this.articleForm.get('image').value,
       this.articleForm.get('content').value,
       this.articleForm.get('category').value,
-      this.published)
+      this.published);
     console.log(this.model);
     this.articleService.editArticleById(this.model, id)
       .subscribe(data => {

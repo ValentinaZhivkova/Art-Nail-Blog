@@ -6,8 +6,8 @@
   <div class="box-title">
     <div>
       <div class="title">{{article?.title}}<div>
-        <a *ngIf="isInRole || isAuthorCheck(username, article)" href="/edit/{{article?._id}}" class="ad-control edit">&#9998;</a>
-        <button *ngIf="isInRole"  (click)="deleteArticle(article?._id)" class="ad-control delete">&#10006;</button>
+        <a *ngIf="isAuthorCheck(username, article)" href="/edit/{{article?._id}}" class="ad-control edit">&#9998;</a>
+        <button *ngIf="isAdmin"  (click)="deleteArticle(article?._id)" class="ad-control delete">&#10006;</button>
       </div>
       </div>
       <br>
@@ -19,7 +19,7 @@
       <div>Category: {{article?.category}}</div>
       <br>
       <div>
-        <a href="/details/{{article?._id}}" class="btn btn-default">More info</a>
+        <a href="/details/{{article._id}}" class="btn btn-default">More info</a>
       </div>
 
     </div>

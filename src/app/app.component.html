@@ -15,8 +15,9 @@
           <li><a routerLink="/register">Register</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" *ngIf="authService.isLoggedIn()">
-          <li><a routerLink="list">List Articles</a></li>
-          <li><a routerLink="/article">Create Article</a></li>
+          <li><a routerLink="/articles">List Articles</a></li>
+          <li><a routerLink="/create">Create Article</a></li>
+          <li><a routerLink="/userProfile/{{getCurrentUser()}}">My Profile</a></li>
           <li><a routerLink="/logout">Logout</a></li>
         </ul>
       </div>
@@ -25,7 +26,6 @@
 </header>
 
 <main class="main-container">
-
   <router-outlet></router-outlet>
   <br>
   <br>

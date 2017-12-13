@@ -11,14 +11,18 @@ import { ArticleDetailsComponent } from './components/article-details/article-de
 import { LogoutComponent } from './authentication/logout-component/logout.component';
 
 import { AuthGuard } from './guards/auth.guard.service';
+import { AdminGuard } from './guards/admin.guard.service';
+import {UserProfileComponent} from './authentication/user-profile/user-profile.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list', pathMatch: 'full' },
-  { path: 'article',  component: CreateArticleFormComponent },
-  { path: 'details/:id',  component: ArticleDetailsComponent },
-  { path: 'edit/:id',  component: EditArticleComponent },
-  { path: 'list', canActivate: [AuthGuard], component: ListArticlesComponent },
+  { path: '', redirectTo: 'articles', pathMatch: 'full' },
+  { path: 'create',  canActivate: [AuthGuard], component: CreateArticleFormComponent },
+  { path: 'details/:id',  canActivate: [AuthGuard], component: ArticleDetailsComponent  },
+  { path: 'edit/:id',   component: EditArticleComponent },
+  { path: 'delete/:id', redirectTo: 'list',  canActivate: [AdminGuard], pathMatch: 'full' },
+  { path: 'userProfile/:username',  canActivate: [AuthGuard], component: UserProfileComponent },
+  { path: 'articles', canActivate: [AuthGuard], component: ListArticlesComponent },
   { path: 'register',  component: RegisterFormComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'logout', component: LogoutComponent }

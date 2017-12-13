@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { AuthenticationService } from './authentication/auth.service';
+import {Component, OnChanges, ViewContainerRef} from '@angular/core';
+import {AuthenticationService} from './authentication/auth.service';
+import {ToastsManager} from 'ng2-toastr';
 
 
 @Component({
@@ -7,9 +8,19 @@ import { AuthenticationService } from './authentication/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnChanges {
   title = 'Art Nail Blog';
-  constructor(private authService: AuthenticationService) {
+  username: string;
 
+  constructor(private authService: AuthenticationService, private toastr: ToastsManager, private vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+
+  }
+
+  ngOnChanges() {
+    this.getCurrentUser();
+  }
+  getCurrentUser() {
+    return this.username = localStorage.getItem('username');
   }
 }

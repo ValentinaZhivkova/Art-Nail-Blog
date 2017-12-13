@@ -53,11 +53,30 @@ export class AuthenticationService {
     );
   }
 
+  getUser(username) {
+    return this.http.get(
+      userUrl + `?query={"username":"${username}"}`,
+      {
+        headers: this.createAuthHeaders('Kinvey')
+      }
+    );
+  }
+  changeUserImage(userId, user) {
+    return this.http.put(
+      userUrl + '/' + userId,
+      JSON.stringify(user),
+      {
+        headers: this.createAuthHeaders('Kinvey')
+      }
+    );
+  }
+
   isLoggedIn() {
     const authtoken: string = localStorage.getItem('authtoken');
 
     return this.currentAuthtoken = authtoken;
   }
+
   isAdminRequest(userId) {
     return this.http.get(
       userUrl + '/' + userId,

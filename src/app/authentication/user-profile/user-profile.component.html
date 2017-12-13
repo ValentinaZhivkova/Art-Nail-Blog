@@ -1,0 +1,21 @@
+<div>
+  <h3 class="user-profile">{{userProfile?.firstName}} {{userProfile?.lastName}} Profile</h3>
+  <div class="ads-container">
+    <div class="row ads-row">
+      <div >Username:<strong>{{userProfile?.username}}</strong></div>
+
+    </div>
+    <div class="row ads-row">
+            <img src={{userProfile?.image}} alt="img"/>
+    </div>
+
+    <div *ngIf="checkUser()" class="row ads-row">
+      <div class="col-lg-4 col-lg-offset-4">
+        <input [(ngModel)]="model.image" name="image">
+        <button class="btn btn-default" (click)="updateImage(userProfile?._id)">Change Image</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>

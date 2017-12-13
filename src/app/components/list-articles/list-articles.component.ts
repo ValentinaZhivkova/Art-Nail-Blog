@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges} from '@angular/core';
+import {Component, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
 import {ArticleService} from '../article.service';
 import {ArticleModel} from '../models/article.model';
 import {Observable} from 'rxjs/Observable';
@@ -15,13 +15,14 @@ export class ListArticlesComponent implements OnInit, OnChanges {
   public articles: Object;
   public username: string;
   public userId: string;
-  public isInRole: boolean;
+  public isAdmin: boolean;
   public isAuthor: boolean;
 
   constructor(private articleService: ArticleService, private authService: AuthenticationService) {
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem('userId');
   }
+
 
   list() {
     this.articleService.listArticles()
@@ -52,8 +53,8 @@ export class ListArticlesComponent implements OnInit, OnChanges {
   isAdminCheck(userId) {
     return this.authService.isAdminRequest(userId)
       .subscribe(data => {
-          this.isInRole = !!data['_kmd']['roles'];
-          console.log(this.isInRole);
+          this.isAdmin = !!data['_kmd']['roles'];
+          console.log(this.isAdmin);
         },
         err => {
           console.log(err);
