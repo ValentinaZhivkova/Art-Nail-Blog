@@ -17,12 +17,12 @@ import {UserProfileComponent} from './authentication/user-profile/user-profile.c
 
 const routes: Routes = [
   { path: '', redirectTo: 'articles', pathMatch: 'full' },
-  { path: 'create',  canActivate: [AuthGuard], component: CreateArticleFormComponent },
-  { path: 'details/:id',  canActivate: [AuthGuard], component: ArticleDetailsComponent  },
-  { path: 'edit/:id',   component: EditArticleComponent },
-  { path: 'delete/:id', redirectTo: 'list',  canActivate: [AdminGuard], pathMatch: 'full' },
+  { path: 'create',  canActivate: [AuthGuard], loadChildren: 'app/components/article-comments.module#ArticleModule' },
+  { path: 'details/:id',  canActivate: [AuthGuard], loadChildren: 'app/components/article-comments.module#ArticleModule' },
+  { path: 'edit/:id', loadChildren: 'app/components/article-comments.module#ArticleModule' },
+  { path: 'delete/:id', redirectTo: 'article',  canActivate: [AdminGuard], pathMatch: 'full' },
   { path: 'userProfile/:username',  canActivate: [AuthGuard], component: UserProfileComponent },
-  { path: 'articles', canActivate: [AuthGuard], component: ListArticlesComponent },
+  { path: 'articles', canActivate: [AuthGuard], loadChildren : 'app/components/article-comments.module#ArticleModule' },
   { path: 'register',  component: RegisterFormComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'logout', component: LogoutComponent }

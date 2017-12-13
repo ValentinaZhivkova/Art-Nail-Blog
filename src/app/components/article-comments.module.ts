@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {ListArticlesComponent} from './list-articles/list-articles.component';
 import {ArticleDetailsComponent} from './article-details/article-details.component';
 import {EditArticleComponent} from './edit-article/edit-article.form.component';
+import {CreateArticleFormComponent} from './article-create/create-article.form.component';
 
 
 
@@ -27,8 +28,14 @@ import {EditArticleComponent} from './edit-article/edit-article.form.component';
     CommonModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    RouterModule.forChild([
+      {path: '', component: ListArticlesComponent, pathMatch: 'full'},
+      {path: 'articles', component: ListArticlesComponent},
+      {path: 'details/:id', component: ArticleDetailsComponent},
+      {path: 'edit/:id', component: EditArticleComponent},
+      {path: 'create', component: CreateArticleFormComponent},
+    ])
   ],
   exports: [articleComponents],
   providers: [ArticleService, CommentsService]

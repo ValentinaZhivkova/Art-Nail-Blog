@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    ArticleModule,
     AuthenticationModule,
     AppRoutesModule,
     FormsModule,
