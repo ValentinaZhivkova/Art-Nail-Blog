@@ -17,7 +17,7 @@
         <ul class="nav navbar-nav navbar-right" *ngIf="authService.isLoggedIn()">
           <li><a routerLink="/articles">List Articles</a></li>
           <li><a routerLink="/articles/create">Create Article</a></li>
-          <li><a routerLink="/userProfile/{{getCurrentUser()}}">My Profile</a></li>
+          <li><a routerLink="/userProfile/{{getCurrentUser()}}">{{getCurrentUser()}} Profile</a></li>
           <li><a routerLink="/logout">Logout</a></li>
         </ul>
       </div>

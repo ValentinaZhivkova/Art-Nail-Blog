@@ -1,7 +1,8 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewContainerRef} from '@angular/core';
 import {AuthenticationService} from '../auth.service';
 import {UserProfileModel} from '../models/user-profile.model';
 import {ActivatedRoute} from '@angular/router';
+import {ToastsManager} from 'ng2-toastr';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class UserProfileComponent implements OnInit, OnChanges {
   username: string;
   isCurrentUser: boolean;
 
-  constructor(private authService: AuthenticationService, private route: ActivatedRoute) {
+  constructor(private authService: AuthenticationService, private route: ActivatedRoute,
+              private toastr: ToastsManager, private vcr: ViewContainerRef) {
 
     this.username = this.route.snapshot.params['username'];
     this.model = new UserProfileModel(
@@ -27,20 +29,14 @@ export class UserProfileComponent implements OnInit, OnChanges {
 
   checkUser() {
     const userName = this.route.snapshot.params['username'];
-    console.log('USER' + this.isCurrentUser);
-    console.log(localStorage.getItem('username'));
-    console.log(this.username);
     return this.isCurrentUser = userName === localStorage.getItem('username');
 
   }
 
   getUserProfile() {
-    console.log(this.username);
-    console.log('route' + this.route.snapshot.params['username']);
     this.authService.getUser(this.route.snapshot.params['username'])
       .subscribe(data => {
         this.userProfile = data[0];
-        console.log(this.userProfile);
       });
   }
 
@@ -50,7 +46,11 @@ export class UserProfileComponent implements OnInit, OnChanges {
       .subscribe(data => {
 
         this.userProfile = data;
-      });
+        this.toastr.info('Profile image changed!');
+      },
+        err => {
+        this.toastr.error(err.message);
+        });
   }
 
   ngOnInit() {

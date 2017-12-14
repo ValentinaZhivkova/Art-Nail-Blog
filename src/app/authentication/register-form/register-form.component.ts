@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {RegisterModel} from '../../authentication/models/register.model';
 import {AuthenticationService} from '../../authentication/auth.service';
 import {Route, Router} from '@angular/router';
+import {ToastsManager} from 'ng2-toastr';
+
 
 
 @Component({
@@ -16,8 +18,10 @@ export class RegisterFormComponent implements OnInit {
   public registerSuccess: boolean;
   public registerFail: boolean;
 
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router,
+              private toastr: ToastsManager, private vcr: ViewContainerRef) {
     this.model = new RegisterModel('', '', '', '', 'http://via.placeholder.com/350x200');
+    this.toastr.setRootViewContainerRef(this.vcr);
   }
 
   register(): void {
@@ -32,6 +36,7 @@ export class RegisterFormComponent implements OnInit {
         },
         err => {
           this.registerFail = false;
+          this.toastr.error(err.message);
         });
   }
 

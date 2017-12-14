@@ -42,8 +42,8 @@ export class EditArticleComponent implements OnInit {
   ngOnInit(): void {
     this.getArticleForEditing(this.articleId);
     this.articleForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
-      author: ['', [Validators.required, Validators.maxLength(10)]],
+      title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+      author: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       image: ['', [Validators.required]],
       content: [''],
       category: this.categories[0],

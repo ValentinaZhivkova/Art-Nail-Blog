@@ -1,9 +1,10 @@
-import {Component, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, OnChanges, Output, EventEmitter, ViewContainerRef} from '@angular/core';
 import {ArticleService} from '../article.service';
 import {ArticleModel} from '../models/article.model';
 import {Observable} from 'rxjs/Observable';
 
 import {AuthenticationService} from '../../authentication/auth.service';
+import {ToastsManager} from 'ng2-toastr';
 
 @Component({
   templateUrl: './list-articles.component.html',
@@ -18,7 +19,9 @@ export class ListArticlesComponent implements OnInit, OnChanges {
   public isAdmin: boolean;
   public isAuthor: boolean;
 
-  constructor(private articleService: ArticleService, private authService: AuthenticationService) {
+  constructor(private articleService: ArticleService, private authService: AuthenticationService,
+              private toastr: ToastsManager, private vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(this.vcr)
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem('userId');
   }
@@ -41,7 +44,6 @@ export class ListArticlesComponent implements OnInit, OnChanges {
   }
 
   isAuthorCheck(username, article) {
-    console.log(username + '->' + article['creator']);
     if (article['creator'] === username) {
       return true;
     } else {
@@ -75,10 +77,12 @@ export class ListArticlesComponent implements OnInit, OnChanges {
   deleteArticle(id) {
     this.articleService.deleteArticle(id)
       .subscribe(data => {
+        this.toastr.success('Article successfully deleted!');
           this.list();
         },
         err => {
-          console.log(err);
+          this.toastr.error(err.message);
+
         });
   }
 }

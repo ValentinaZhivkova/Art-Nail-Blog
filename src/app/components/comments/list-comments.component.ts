@@ -1,8 +1,9 @@
-import {Component, OnInit, Input, OnChanges} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, ViewContainerRef} from '@angular/core';
 import {CommentsService} from '../comment.service';
 import {CommentModel} from '../models/comment.model';
 import {ActivatedRoute} from '@angular/router';
 import { AuthenticationService } from '../../authentication/auth.service';
+import {ToastsManager} from 'ng2-toastr';
 
 @Component({
   selector: 'app-comment',
@@ -15,7 +16,8 @@ export class CommentComponent implements OnInit, OnChanges {
   isAdmin: boolean;
   comments;
 
-  constructor(private commentsService: CommentsService, private route: ActivatedRoute, private authService: AuthenticationService) {
+  constructor(private commentsService: CommentsService, private route: ActivatedRoute, private authService: AuthenticationService,
+              private toastr: ToastsManager, private vcr: ViewContainerRef) {
     // this.articleId = route.snapshot.params['id'];
     this.model = new CommentModel(
       this.articleId,
@@ -50,18 +52,18 @@ export class CommentComponent implements OnInit, OnChanges {
     this.model.articleId = this.articleId;
     this.commentsService.postComment(this.model)
       .subscribe(data => {
-          // TODO: notify successful comment create
+          this.toastr.success('Comment added!')
           this.loadComments();
         },
         err => {
-          console.log(err);
+          this.toastr.error(err.message);
         });
   }
 
   deleteComment(id) {
     this.commentsService.deleteComment(id)
       .subscribe(data => {
-        // TODO: notify successful comment delete
+        this.toastr.info('Comment deleted!')
         this.loadComments();
       });
   }

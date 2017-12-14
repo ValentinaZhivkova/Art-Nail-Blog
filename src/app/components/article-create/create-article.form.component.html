@@ -6,26 +6,29 @@
     <div class="form-group">
       <label for="title">Title</label>
       <input name="title" type="text" class="form-control" id="title" [(ngModel)]="model.title" #title="ngModel"
-             maxlength="20"  required>
+            maxlength="20"  required>
     </div>
     <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
 
       Title is required!
     </div>
-    <div *ngIf="title.maxLength > 15" class="alert alert-danger">Maxlength</div>
+    <div [hidden]="title.pristine" class="alert alert-danger">Title max length is 20 symbols</div>
 
     <div class="form-group">
       <label for="author">Author</label>
       <input name="author" type="text" class="form-control" id="author" [(ngModel)]="model.author" #author="ngModel"
-             required>
+             minlength="3" maxlength="20" required>
+    </div>
+    <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
+      Author is required!
     </div>
     <div class="form-group">
       <label for="image">Image Url</label>
-      <input type="url" class="form-control" id="image" name="image" [(ngModel)]="model.image" #image="ngModel"
+      <input type="url" class="form-control" id="image" name="image" minlength="10" [(ngModel)]="model.image" #image="ngModel"
              required/>
-      <span [hidden]="image.valid || image.pristine">
+      <div [hidden]="image.valid || image.pristine" class="alert alert-danger">
       Image is required!
-      </span>
+      </div>
     </div>
     <div class="form-group">
       <label for="content">Content</label>

@@ -8,7 +8,7 @@
              required>
     </div>
     <div [hidden]="articleForm.get('title').valid || articleForm.get('title').pristine" class="alert alert-danger">
-      Title is required!
+      Title with maximum of 10 symbols  is required!
     </div>
 
     <div class="form-group">
