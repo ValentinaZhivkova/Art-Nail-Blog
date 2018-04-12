@@ -13,6 +13,7 @@ import { LogoutComponent } from './authentication/logout-component/logout.compon
 import { AuthGuard } from './guards/auth.guard.service';
 import { AdminGuard } from './guards/admin.guard.service';
 import {UserProfileComponent} from './authentication/user-profile/user-profile.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'articles', canActivate: [AuthGuard], loadChildren : 'app/components/article-comments.module#ArticleModule' },
   { path: 'register',  component: RegisterFormComponent },
   { path: 'login', component: LoginFormComponent },
-  { path: 'logout', component: LogoutComponent }
+  { path: 'logout', component: LogoutComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

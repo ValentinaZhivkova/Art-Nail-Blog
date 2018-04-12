@@ -4,8 +4,8 @@
   <form (ngSubmit)="editArticle(articleId)" [formGroup]="articleForm">
     <div class="form-group">
       <label for="title">Title</label>
-      <input formControlName="title"  type="text" class="form-control" id="title" value={{article?.title}}
-             required>
+      <input formControlName="title"  type="text" class="form-control" id="title" name="title"
+             >
     </div>
     <div [hidden]="articleForm.get('title').valid || articleForm.get('title').pristine" class="alert alert-danger">
       Title with maximum of 10 symbols  is required!
@@ -13,8 +13,8 @@
 
     <div class="form-group">
       <label for="image">Image Url</label>
-      <input formControlName="image" type="text" class="form-control" id="image" value={{article?.image}}
-        required/>
+      <input formControlName="image" type="text"  class="form-control" id="image"
+        />
       <span [hidden]="articleForm.get('image').valid || articleForm.get('image').pristine">
       Image is required!
       </span>
@@ -22,8 +22,8 @@
 
     <div class="form-group">
       <label for="author">Author</label>
-      <input formControlName="author" type="text" class="form-control" id="author" value={{article?.author}}
-             required>
+      <input formControlName="author" type="text" class="form-control" id="author"
+             >
     </div>
     <div *ngIf="(articleForm.get('author').touched
       || articleForm.get('author').dirty)
@@ -38,7 +38,7 @@
 
     <div class="form-group" [ngClass]="{'has-error': contentMessage}">
       <label for="content">Content</label>
-      <input formControlName="content" type="text" class="form-control" id="content" minlength="10"  value={{article?.content}}required>
+      <input formControlName="content" type="text" class="form-control" id="content" minlength="10"  value={{article?.content}}>
     </div>
     <div *ngIf="contentMessage" class="alert alert-danger">{{contentMessage}}</div>
 
@@ -47,7 +47,7 @@
       <select class="form-control"
               id="category"
 
-              required>
+              >
         <option *ngFor="let category of categories" [value]="category"  >{{category}}</option>
       </select>
     </div>

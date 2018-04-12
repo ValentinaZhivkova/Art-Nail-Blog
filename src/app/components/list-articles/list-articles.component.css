@@ -1,26 +1,62 @@
 .ad-box {
-  padding: 0;
-  width: 300px;
-  height: 348px;
-  border: 1px solid black;
+  padding: 5px;
+  height: 450px;
+  /* border: 1px solid black; */
   text-align: center;
-
-  margin: 20px;
   /*display: inline-block;*/
-  float: left;
+  /*margin: 20px;*/
+  border-radius: 10px;
+  box-shadow: 1px 1px 14px grey;
+  margin-bottom: 30px;
 }
 
-.ad-box div {
-  display: inline-block;
+figure {
+  height: 300px;
 }
 
 .ad-box img {
-  margin-top: 20px;
-  height:196px;
-  width: auto;
-  max-width: 250px;
-  max-height: 200px;
+  margin: 20px auto;
+  height: 200px;
+  box-shadow: 1px 1px 14px grey;
+  border-radius: 10px;
 }
-.title{
+
+.title {
   font-size: 1.5em;
+  float: left;
 }
+
+.box-title {
+  padding: 15px 15px 20px;
+  text-transform: capitalize;
+}
+
+.ad-control {
+  float: right;
+  background: none;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.ad-control.delete:hover {
+  border: none;
+  box-shadow: 0 0 5px red;
+}
+
+.ad-control.edit:hover {
+  border: 1px solid white;
+  box-shadow: 0 0 5px green;
+}
+
+.ad-control a:hover {
+  text-decoration: none;
+}
+
+figcaption span{
+  font-style: italic;
+}
+.category {
+  margin-bottom: 10px;
+}
+

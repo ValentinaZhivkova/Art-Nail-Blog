@@ -9,15 +9,14 @@
             maxlength="20"  required>
     </div>
     <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
-
       Title is required!
     </div>
-    <div [hidden]="title.pristine" class="alert alert-danger">Title max length is 20 symbols</div>
+    <div [hidden]="title.pristine || title.valid" class="alert alert-danger">Title max length is 20 symbols</div>
 
     <div class="form-group">
       <label for="author">Author</label>
-      <input name="author" type="text" class="form-control" id="author" [(ngModel)]="model.author" #author="ngModel"
-             minlength="3" maxlength="20" required>
+      <input name="author" type="text" class="form-control" id="author" [(ngModel)]="model.creator" #author="ngModel"
+             minlength="3" maxlength="20" disabled>
     </div>
     <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
       Author is required!
@@ -32,11 +31,11 @@
     </div>
     <div class="form-group">
       <label for="content">Content</label>
-      <input name="content" type="text" class="form-control" id="content"[(ngModel)]="model.content" required>
+      <input name="content" type="text" class="form-control" id="content" [(ngModel)]="model.content" required>
     </div>
     <div class="form-group">
       <label for="published">published</label>
-      <input name="published" type="text" class="form-control" id="published"[(ngModel)]="model.published" disabled>
+      <input name="published" type="text" class="form-control" id="published" [(ngModel)]="model.published" disabled>
     </div>
     <div class="form-group">
       <label for="category">Category</label>

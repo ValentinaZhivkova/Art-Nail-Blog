@@ -23,7 +23,7 @@ export class CreateArticleFormComponent {
     this.categories = ['Nail Art', 'Manicure', 'Nail Forms'];
     this.model = new ArticleModel(
       '',
-      '',
+      this.creator,
       this.creator,
       '',
       '',

@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewContainerRef, DoCheck} from '@angular/core';
 import {AuthenticationService} from '../auth.service';
 import {UserProfileModel} from '../models/user-profile.model';
 import {ActivatedRoute} from '@angular/router';
@@ -8,7 +8,7 @@ import {ToastsManager} from 'ng2-toastr';
 @Component({
   templateUrl: './user-profile.component.html'
 })
-export class UserProfileComponent implements OnInit, OnChanges {
+export class UserProfileComponent implements OnInit, OnChanges, DoCheck {
   userProfile;
   model: UserProfileModel;
   username: string;
@@ -25,7 +25,6 @@ export class UserProfileComponent implements OnInit, OnChanges {
       ''
     );
   }
-
 
   checkUser() {
     const userName = this.route.snapshot.params['username'];
@@ -46,6 +45,7 @@ export class UserProfileComponent implements OnInit, OnChanges {
       .subscribe(data => {
 
         this.userProfile = data;
+        this.model.image = '';
         this.toastr.info('Profile image changed!');
       },
         err => {
@@ -59,5 +59,8 @@ export class UserProfileComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.getUserProfile();
+  }
+  ngDoCheck() {
+    // this.getUserProfile()
   }
 }

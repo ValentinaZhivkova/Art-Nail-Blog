@@ -15,10 +15,16 @@ export class AppComponent implements OnChanges {
   constructor(private authService: AuthenticationService, private toastr: ToastsManager, private vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
 
+     this.authService.getUser(localStorage.getItem('username'))
+      .subscribe(user => {
+         // debugger
+
+        this.username = user[0]['username'];
+      });
   }
 
   ngOnChanges() {
-    this.getCurrentUser();
+   this.getCurrentUser();
   }
   getCurrentUser() {
     return this.username = localStorage.getItem('username');

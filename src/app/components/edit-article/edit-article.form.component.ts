@@ -14,7 +14,7 @@ import {ArticleModel} from '../models/article.model';
   templateUrl: './edit-article.form.component.html',
   styleUrls: ['./edit-article.form.component.css']
 })
-export class EditArticleComponent implements OnInit {
+export class EditArticleComponent implements OnInit, OnChanges {
   public articleId: string;
   public model: ArticleModel;
   public article: Object;
@@ -23,6 +23,7 @@ export class EditArticleComponent implements OnInit {
   public categories: string[];
   public contentMessage: string;
   public published: string;
+  public postData;
 
   private contentValidationMessage = {
     required: 'Content is required!',
@@ -40,7 +41,7 @@ export class EditArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getArticleForEditing(this.articleId);
+
     this.articleForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
       author: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
@@ -49,6 +50,8 @@ export class EditArticleComponent implements OnInit {
       category: this.categories[0],
       published: new Date()
     });
+    this.postData = this.getArticleForEditing(this.articleId);
+    console.log(this.postData);
 
 
     this.articleForm.get('category').valueChanges.subscribe(console.log);
@@ -62,11 +65,31 @@ export class EditArticleComponent implements OnInit {
 
   }
 
+  ngOnChanges() {
+
+  }
+
   getArticleForEditing(id) {
     this.articleService.getArticleById(id)
       .subscribe(data => {
         this.article = data;
         console.log(this.article);
+        this.articleForm = this.fb.group({
+          title: [this.article['title'], [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+          author: [this.article['author'], [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+          image: [this.article['image'], [Validators.required]],
+          content: [''],
+          category: this.categories[0],
+          published: new Date()
+        });
+        this.articleForm.get('category').valueChanges.subscribe(console.log);
+        this.articleForm.get('author').valueChanges.subscribe(console.log);
+
+
+        const contentControl = this.articleForm.get('content');
+        contentControl.valueChanges.debounceTime(1000).subscribe(value => {
+          this.setMessage(contentControl);
+        });
 
       });
   }
